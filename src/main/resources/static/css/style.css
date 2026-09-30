@@ -1,0 +1,596 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ==========================================
+   BRAND COLOR VARIABLES
+   ========================================== */
+:root {
+    --brand-green-dark: #075e29;
+    --brand-green-primary: #0b8a3c;
+    --brand-green-light: #10b981;
+    --brand-green-hover: #08692e;
+    --brand-green-bg: #e8f5e9;
+    --text-dark: #0f172a;
+    --text-muted: #64748b;
+    --border-color: #cbd5e1;
+}
+
+/* ==========================================
+   1. LOGIN PAGE STYLES
+   ========================================== */
+body.login-body {
+    background: url('/images/siclife2.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Dark overlay to enhance contrast for the frosted glass card */
+body.login-body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    position: relative;
+}
+
+.brand-header {
+    text-align: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.brand-header h2 {
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.brand-header p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.login-title h3 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.login-title p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0.4rem;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+/* Remember me styling */
+.form-remember {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    color: #ffffff;
+    font-size: 0.85rem;
+}
+
+.form-remember input[type="checkbox"] {
+    accent-color: var(--brand-green-primary);
+    width: 1rem;
+    height: 1rem;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 0.85rem;
+    background: linear-gradient(135deg, var(--brand-green-primary) 0%, var(--brand-green-dark) 100%);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+    filter: brightness(1.1);
+}
+
+.alert-error {
+    background-color: rgba(254, 242, 242, 0.9);
+    color: #dc2626;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    border: 1px solid #fecaca;
+}
+
+.login-footer-text {
+    text-align: center;
+    margin-top: 1.25rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.login-footer-text a {
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-footer-text a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================
+   2. DASHBOARD LAYOUT STYLES
+   ========================================== */
+body.dashboard-body {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8fafc;
+}
+body.dashboard-body {
+    display: flex;
+    min-height: 100vh;
+    background: url('/images/siclife4.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+
+.sidebar {
+    width: 260px;
+    background-color: #064e21;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+}
+
+.sidebar-brand {
+    border-bottom: 1px solid #147a3b;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-brand h2 {
+    color: #ffffff;
+    font-size: 1.4rem;
+}
+
+.sidebar-brand span {
+    font-size: 0.75rem;
+    color: #a7f3d0;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.sidebar-menu a {
+    color: #e2e8f0;
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.sidebar-menu a:hover, 
+.sidebar-menu a.active {
+    background-color: #0b8a3c;
+    color: #ffffff;
+}
+
+.sidebar-footer {
+    border-top: 1px solid #147a3b;
+    padding-top: 1rem;
+}
+
+.user-info span {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.user-info small {
+    color: #a7f3d0;
+    font-size: 0.75rem;
+}
+
+.btn-logout {
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.5rem;
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.dashboard-content {
+    flex: 1;
+    padding: 2rem;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-top: 4px solid var(--brand-green-primary);
+}
+
+.stat-card h3 {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card .value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--brand-green-dark);
+}
+
+.star-worker-card {
+    background: linear-gradient(135deg, #075e29 0%, #10b981 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    position: relative;
+}
+
+.star-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+/* ==========================================
+   3. FORM CATALOG STYLES
+   ========================================== */
+.catalog-subtitle {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.catalog-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.75rem;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.catalog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: var(--brand-green-primary);
+}
+
+.card-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+
+.catalog-card h3 {
+    color: var(--text-dark);
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+}
+
+.catalog-card p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+}
+
+/* ==========================================
+   /* ==========================================
+   4. MODAL POP-UP & DYNAMIC FORM STYLES
+   ========================================== */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 480px;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.modal-large {
+    max-width: 700px !important;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.75rem;
+}
+
+.modal-header h3 {
+    color: var(--brand-green-dark, #064e21);
+    font-size: 1.2rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #64748b;
+}
+
+.close-btn:hover {
+    color: #0f172a;
+}
+
+/* Explicitly style modal inputs so text/labels show clearly */
+.modal-card label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 0.4rem;
+}
+
+.modal-card input,
+.modal-card select,
+.modal-card textarea {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    background-color: #ffffff;
+    color: #0f172a;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.modal-card input::placeholder {
+    color: #94a3b8;
+}
+
+.form-section-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: var(--brand-green-primary, #064e21);
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    margin: 1.2rem 0 0.8rem 0;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* ==========================================
+   5. DATA TABLES & SYSTEM LOG STYLES
+   ========================================== */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.data-table th,
+.data-table td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.data-table th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+/* Badge System for User Roles */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-transform: uppercase;
+}
+
+.badge.role-admin {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.badge.role-supervisor {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.badge.role-agent {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+/* Small Action Buttons (e.g., User Status Toggles) */
+.btn-sm {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 4px;
+    border: 1px solid #cbd5e1;
+    background-color: #ffffff;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-sm:hover {
+    background-color: #f1f5f9;
+    border-color: #94a3b8;
+}
+
+/* ==========================================
+   6. USER MANAGEMENT & MODAL UTILITIES
+   ========================================== */
+.user-mgmt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.btn-deactivate:hover {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border-color: #fecaca;
+}
+
+.btn-activate:hover {
+    background-color: #f0fdf4;
+    color: #16a34a;
+    border-color: #bbf7d0;
+}
+
+/* ==========================================
+   7. RESPONSIVE MEDIA QUERIES
+   ========================================== */
+@media (max-width: 640px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}

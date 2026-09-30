@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIC Life Insurance - Field Portal</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="login-body">
+    <div class="login-card">
+        <div class="brand-header">
+            <h2>SIC LIFE</h2>
+            <p>Absolute Peace of Mind</p>
+        </div>
+        <div class="login-title">
+            <h3>Field Agent Portal</h3>
+            <p>Enter your credentials to access your account</p>
+        </div>
+        <div id="error-message" class="alert-error" style="display: none;"></div>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-primary">Sign In</button>
+        </form>
+    </div>
+
+    <script src="/js/auth.js"></script>
+</body>
+</html>

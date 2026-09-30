@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIC Life - Main Dashboard</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-body">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h2>SIC LIFE</h2>
+            <span>Field Agent Portal</span>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="#" id="menu-dashboard" class="active"> Dashboard</a>
+            <a href="#" id="menu-register-form"> Register New Form</a>
+            <a href="#" id="menu-user-mgmt" style="display: none;">User Management</a>
+            <a href="#" id="menu-activity-log" style="display: none;"> Activity Log</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <span id="user-display-name">Loading...</span>
+                <small id="user-display-role"></small>
+            </div>
+            <button id="logoutBtn" class="btn-logout">Logout</button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="dashboard-content">
+        <header class="top-header">
+            <h1 id="page-title">Dashboard Overview</h1>
+            <span class="current-date" id="currentDate"></span>
+        </header>
+
+        <!-- DASHBOARD VIEW -->
+        <div id="view-dashboard">
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <h3>Today's Submissions</h3>
+                    <div class="value" id="stat-daily">0</div>
+                    <small>Forms entered today</small>
+                </div>
+                <div class="stat-card">
+                    <h3>Weekly Submissions</h3>
+                    <div class="value" id="stat-weekly">0</div>
+                    <small>Forms entered this week</small>
+                </div>
+                <div class="stat-card">
+                    <h3>Monthly Submissions</h3>
+                    <div class="value" id="stat-monthly">0</div>
+                    <small>Forms entered this month</small>
+                </div>
+            </section>
+
+            <section class="star-worker-card">
+                <div class="star-badge">Monthly Star Worker</div>
+                <div class="star-worker-details">
+                    <h2 id="star-worker-name">Awaiting Submissions...</h2>
+                    <p id="star-worker-stats">Top performing field agent this month</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- FORM CATALOG VIEW -->
+        <div id="view-catalog" style="display: none;">
+            <p class="catalog-subtitle">Select an official SIC Life form to fill out for your client:</p>
+            <div class="catalog-grid">
+                <!-- Template 1 -->
+                <div class="catalog-card">
+                    
+                    <h3>Guaranteed Endowment Plan</h3>
+                    <p>Application for Life Assurance with savings benefits, sum assured choices, and beneficiary options.</p>
+                    <button class="btn-primary open-form-btn" data-form="endowment">Fill Proposal Form</button>
+                </div>
+
+                <!-- Template 2 -->
+                <div class="catalog-card">
+                    
+                    <h3>Education Plan Plus</h3>
+                    <p>Educational policy proposal for child education coverage, health declarations, and trustees.</p>
+                    <button class="btn-primary open-form-btn" data-form="education">Fill Proposal Form</button>
+                </div>
+
+                <!-- Template 3 -->
+                <div class="catalog-card">
+                    
+                    <h3>Direct Debit Authorization</h3>
+                    <p>Fixed/Variable GhIPSS automated clearing bank authorization for policy monthly premiums.</p>
+                    <button class="btn-primary open-form-btn" data-form="directdebit">Fill Mandate Form</button>
+                </div>
+
+                <!-- Template 4 -->
+                <div class="catalog-card">
+                    
+                    <h3>Change of Beneficiary</h3>
+                    <p>Formal request to update or add new beneficiaries to an existing active SIC Life policy.</p>
+                    <button class="btn-primary open-form-btn" data-form="beneficiary">Fill Request Form</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- USER MANAGEMENT VIEW (Admin Only) -->
+        <div id="view-user-mgmt" style="display: none;">
+            <div class="section-card">
+                <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div>
+                        <h3>System Users</h3>
+                        <p class="subtitle" style="margin: 0; color: #666;">Manage agent accounts, roles, and authorization status.</p>
+                    </div>
+                    <button class="btn-primary" onclick="openAddUserModal()">+ Add New User</button>
+                </div>
+                <div id="user-list-container"></div>
+            </div>
+        </div>
+
+        <!-- ACTIVITY LOG VIEW (Supervisor / Admin) -->
+        <div id="view-activity-log" style="display: none;">
+            <div class="section-card">
+                <h3>System Activity Logs</h3>
+                <p>Recent form submissions, logins, and system transactions.</p>
+                <div id="activity-log-container"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- DYNAMIC FORM MODAL -->
+    <div id="formModal" class="modal-backdrop" style="display: none;">
+        <div class="modal-card modal-large">
+            <div class="modal-header">
+                <h3 id="modal-form-title">Proposal Form</h3>
+                <button id="closeModalBtn" class="close-btn">&times;</button>
+            </div>
+            <div id="modal-form-body">
+                <!-- Form fields inject dynamically based on selected catalog item -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD USER MODAL -->
+    <div id="addUserModal" class="modal-backdrop" style="display: none;">
+        <div class="modal-card" style="max-width: 450px;">
+            <div class="modal-header">
+                <h3>Create New User Account</h3>
+                <button onclick="closeAddUserModal()" class="close-btn">&times;</button>
+            </div>
+            <form id="addUserForm" onsubmit="handleCreateUser(event)" style="padding: 20px 0 0 0;">
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label style="display: block; font-weight: 500; margin-bottom: 5px;">Full Name</label>
+                    <input type="text" id="newFullName" required placeholder="e.g. John Doe" style="width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label style="display: block; font-weight: 500; margin-bottom: 5px;">Username</label>
+                    <input type="text" id="newUsername" required placeholder="e.g. jdoe" style="width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label style="display: block; font-weight: 500; margin-bottom: 5px;">Email</label>
+                    <input type="email" id="newEmail" required placeholder="e.g. jdoe@siclife.com" style="width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label style="display: block; font-weight: 500; margin-bottom: 5px;">Password</label>
+                    <input type="password" id="newPassword" required placeholder="••••••••" style="width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 500; margin-bottom: 5px;">Role</label>
+                    <select id="newRole" required style="width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px;">
+                        <option value="AGENT">AGENT</option>
+                        <option value="SUPERVISOR">SUPERVISOR</option>
+                        <option value="ADMIN">ADMIN</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 10px;">Create User</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>
